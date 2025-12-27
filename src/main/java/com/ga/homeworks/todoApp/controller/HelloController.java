@@ -1,4 +1,4 @@
-package com.ga.homeworks.todoApp.controllers;
+package com.ga.homeworks.todoApp.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
