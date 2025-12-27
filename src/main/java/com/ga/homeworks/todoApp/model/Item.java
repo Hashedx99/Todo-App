@@ -1,19 +1,20 @@
 package com.ga.homeworks.todoApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name = "items")
+public class Item {
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +29,9 @@ public class Category {
     @Getter @Setter private String description;
 
     @Column
+    @Getter @Setter private LocalDateTime dueDate;
+
+    @Column
     @CreationTimestamp
     @Getter @Setter private LocalDateTime createdAt;
 
@@ -35,6 +39,8 @@ public class Category {
     @UpdateTimestamp
     @Getter @Setter private LocalDateTime updatedAt;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category", orphanRemoval = true)
-    @Getter @Setter private List<Item> itemList;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @Getter @Setter private Category category;
 }
